@@ -1,6 +1,7 @@
 {
   "projects": {
+    "zhiying-food-app": "zhi-ying-decision-maker",
     "default": "zhi-ying-decision-maker",
-    "choice maker": "zhi-ying-decision-maker"
+    "zhi-ying-decision-maker": "zhi-ying-decision-maker"
   }
 }
