@@ -1,5 +1,11 @@
 
 import React, { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch,
+} from 'react-router-dom';
 import ReactDOM from "react-dom";
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
@@ -13,7 +19,6 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Icon, InlineIcon } from '@iconify/react';
-import alphaMCircle from '@iconify-icons/mdi/alpha-m-circle';
 import catIcon from '@iconify-icons/fa-solid/cat';
 
 
@@ -27,78 +32,65 @@ function Copyright() {
   );
 }
 
+const options = [
+  "Eeting's House",
+  "NTU North Spine",
+  "Beauty In The Pot",
+  "HaiDiLao",
+  "Eat NOTHING",
+  "make up your own DAMN MIND or roll again",
+  "Find something and cook at home",
+  "Grab", 
+  "Deliveroo", 
+  "KBBQ at Clementi Mall",
+  "Ask your mum to cook for you", 
+  <a target="_blank" href="https://danielfooddiary.com/2021/02/15/clementicafes/">Cafes in Clementi</a>,
+  "Jem Genki Sushi", 
+  "ToastBox",
+  "Don Don Donki",
+  "McDonalds",
+  "Jurong East Mall foodcourt", 
+  "Bingsu at Westgate",
+  "Ippudo",
+  "Star Vista Watami",
+  "Bugis Four Seasons Ramen",
+  "Ichiban Sushi/Boshi",
+  <a target="_blank" href="https://eatbook.sg/orchard-food/">Orchard places</a>,
+  <a target="_blank" href="https://thehoneycombers.com/singapore/bugis-food-restaurants-cafes/">Places in Bugis</a>,
+  "Changi Village Hawker Centre",
+  "Newton Food Centre",
+  "Two Men Bagel House",
+  "Fat Burger",
+  "Chir Chir",
+  "So Pho",
+  "Bubble Tea (nearest one)",
+  "Find sth in Fairprice/Giant",
+  "Mos Burger",
+  "Tamago-En",
+  "Three Meals A Day",
+  "Hansang Korean Family Restaurant",
+  "Seoul Yummy",
+  "Bimi Kaiho Restaurant",
+  "Kushikatsu Tanaka",
+  "Misato",
+  "Kabe No Ana @ Serangoon",
+  "Kei Kaisendon"
+]
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
-function Option1() {
-    const classes = useStyles();
-    return (
-        <Typography variant="h5" className={classes.custom}>
-            Eeting's House
-        </Typography>
-    );
-}
 
-function Option2() {
-    const classes = useStyles();
-    return (
-        <Typography variant="h5" className={classes.custom}>
-            NTU North Spine
-        </Typography>
-    );
-}
-
-function Option3() {
-    const classes = useStyles();
-    return (
-        <Typography variant="h5" className={classes.custom}>
-            Beauty In The Pot
-        </Typography>
-    );
-}
-
-function Option4() {
-    const classes = useStyles();
-    return (
-        <Typography variant="h5" className={classes.custom}>
-            Eat NOTHING
-        </Typography>
-    );
-}
-
-function Option5() {
-    const classes = useStyles();
-    return (
-        <Typography variant="h5" className={classes.custom}>
-            make up your own DAMN MIND or roll again
-        </Typography>
-    );
-}
-
-function Nothing() {
-    const classes = useStyles();
-    return (
-        <Typography variant="h5" className={classes.custom}>
-            
-        </Typography>
-    );
-}
 
 function Deciding(props) {
-    const index = props.index;
-    if (index == 0) {
-        return <Option1 />;
-      } else if (index == 1) {
-        return <Option2 />;
-      } else if (index == 2) {
-        return <Option3 />;
-      } else if (index == 3) {
-        return <Option4 />;
-      } else if (index == 4) {
-        return <Option5 />;
-      } 
-    return <Nothing />;
+  const classes = useStyles();
+  const index = props.index;
+  return (
+    <Typography variant="h5" align="center" className={classes.custom}>
+        {options[index]}
+    </Typography>
+);
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -106,10 +98,8 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   image: {
-    backgroundImage: 'url(https://source.unsplash.com/fdlZBWIP0aM/3673x5207)',
     backgroundRepeat: 'no-repeat',
-    backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+    backgroundColor: '#d0f0c0',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
@@ -135,7 +125,7 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: "bold",
       fontFamily: "Arial",
       fontSize: 28,
-      marginTop: theme.spacing(2)
+      marginTop: theme.spacing(2),
     },
   descriptions: {
       color: "#225FA6",
@@ -163,21 +153,20 @@ export default function Login () {
   let [Count, setCount] = useState(-1);
 
   function handleChange(event) {
-      setCount(getRandomInt(5))
+      setCount(getRandomInt(options.length))
   }
 
   return (
     <Grid container component="main" className={classes.root}>
           <CssBaseline />
-          <Grid item xs={false} sm={4} md={5} className={classes.image} />
-          <Grid item xs={12} sm={8} md={7} component={Paper} elevation={6} square>
+          <Grid item xs={12} sm={8} md={12} component={Paper} elevation={6} className={classes.image}>
             <div className={classes.paper}>
                 <Icon icon={catIcon} color="#D6485F" width="5em" height="5em" />
-              <Typography variant="h5" className={classes.custom}>
+              <Typography variant="h5" align="center" className={classes.custom}>
                 Zhi Ying's Food Decision Maker
               </Typography>
 
-              <Typography variant="h7" className={classes.descriptions}>
+              <Typography variant="h7" align="center" className={classes.descriptions}>
                 Click on the button below to help you decide what to eat!
               </Typography>
                 <Button

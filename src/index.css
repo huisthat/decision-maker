@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+a {
+  color: #D6485F;
+  font-weight: "bold";
+  font-family: "Arial";
+  font-size: 28,
+}
